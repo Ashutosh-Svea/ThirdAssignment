@@ -5,6 +5,21 @@ namespace ThirdAssignment
 {
     class Program
     {       
+        static List<Dog> CreateDogList()
+        {
+            List<Dog> dogList = new List<Dog>();
+            dogList.Add(new Dog("Dog1", 1.4, 4, "German shepherd"));
+            dogList.Add(new Dog("Dog2", 2.4, 2, "Greyhound"));
+            dogList.Add(new Dog("Dog3", 3.4, 1, "Golden Retriever"));
+            dogList.Add(new Dog("Dog4", 0.4, 6, "Dobermann"));
+
+            //Horse horse = new Horse("horse1", 55, 12, 49);
+            //dogList.Add(horse);
+            //Error one gets is: Cannot convert Horse to Dog. 
+
+            return dogList;
+        }
+
         static void TryDifferentPersons()
         {
             IPersonHandler personHandler = new IPersonHandler();
@@ -97,7 +112,7 @@ namespace ThirdAssignment
 
         }
 
-        static void CreateVariousAnimals()
+        static List<Animal> CreateVariousAnimals()
         {
             Animal horse = new Horse("horsee", 80, 10, 70);
             Animal dog = new Dog("dogee", 30, 10, "Bulldog");
@@ -113,15 +128,10 @@ namespace ThirdAssignment
             animalList.Add(worm);
             animalList.Add(bird);
             animalList.Add(wolf);
-
-            foreach (Animal animal in animalList)
-            {
-                Console.WriteLine(animal.Stats());
-                animal.DoSound();
-            }
+            return animalList;
         }
 
-        static void CreateVariousBirds()
+        static List<Bird> CreateVariousBirds()
         {
             Bird flamingo = new Flamingo("flamingo1", 1.5, 1, 3, 2);
             Bird pelican = new Pelican("pelican1", 15, 2, 5, Utils.BirdColor.Blue);
@@ -131,19 +141,58 @@ namespace ThirdAssignment
             birdList.Add(flamingo);
             birdList.Add(pelican);
             birdList.Add(swan);
-
-            foreach (Bird bird in birdList)
-            {
-                Console.WriteLine(bird.Stats());
-                bird.DoSound();
-            }
+            return birdList;
         }
         static void Main(string[] args)
         {
             //Console.WriteLine("Hello World!");
             TryDifferentPersons();
-            CreateVariousAnimals();
-            CreateVariousBirds();
+
+            try
+            {
+
+                List<Animal> animalList = CreateVariousAnimals();
+                List<Bird> birdList = CreateVariousBirds();
+                List<Dog> dogList = CreateDogList();
+                
+                foreach (Bird bird in birdList)
+                {
+                    animalList.Add(bird);
+                }
+
+                foreach (Dog dog in dogList)
+                {
+                    animalList.Add(dog);
+                }
+
+                Wolfman wolfman = new Wolfman("wolfman1", 89,44,55);
+
+                animalList.Add(wolfman);
+
+                foreach (Animal animal in animalList)
+                {
+                    Console.WriteLine(animal.Stats());
+                    animal.DoSound();
+
+                    //check if animal is also derived from interface IPerson
+                    if (animal.GetType().GetInterface("IPerson") != null)
+                    {
+                        Console.WriteLine($"Animal {animal.Stats()} is also a Person.");
+                        ((IPerson)animal).Talk();
+
+
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
+            //Let the GC clean it all...not deleting anything manually.
         }
     }
 }
