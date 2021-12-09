@@ -4,7 +4,26 @@ using System.Collections.Generic;
 namespace ThirdAssignment
 {
     class Program
-    {       
+    {
+
+        static void AllAnimalStats(List<Animal> animalList)
+        {
+            foreach (Animal animal in animalList)
+            {
+                Console.WriteLine(animal.Stats());
+                animal.DoSound();
+
+                //check if animal is also derived from interface IPerson
+                if (animal.GetType().GetInterface("IPerson") != null)
+                {
+                    Console.WriteLine($"Animal {animal.Stats()} is also a Person.");
+                    ((IPerson)animal).Talk();
+
+
+                }
+
+            }
+        }
         static List<Dog> CreateDogList()
         {
             List<Dog> dogList = new List<Dog>();
@@ -15,7 +34,9 @@ namespace ThirdAssignment
 
             //Horse horse = new Horse("horse1", 55, 12, 49);
             //dogList.Add(horse);
-            //Error one gets is: Cannot convert Horse to Dog. 
+
+            //Error one gets is: Cannot convert Horse to Dog.
+            
 
             return dogList;
         }
@@ -145,45 +166,24 @@ namespace ThirdAssignment
         }
         static void Main(string[] args)
         {
-            //Console.WriteLine("Hello World!");
-            TryDifferentPersons();
+            TryDifferentPersons(); //add various persons with PersonHandler and test various cases. Part 1 of assignment...
 
             try
             {
 
-                List<Animal> animalList = CreateVariousAnimals();
-                List<Bird> birdList = CreateVariousBirds();
-                List<Dog> dogList = CreateDogList();
-                
-                foreach (Bird bird in birdList)
-                {
-                    animalList.Add(bird);
-                }
+                List<Animal> animalList = CreateVariousAnimals();   //create various derived class animal instances and return as List
+                List<Bird> birdList = CreateVariousBirds();         //create various birds and return list of birds
+                List<Dog> dogList = CreateDogList();                //create various dogs and try the adding horse to dog list case.
 
-                foreach (Dog dog in dogList)
-                {
-                    animalList.Add(dog);
-                }
+                animalList.AddRange(birdList);
+
+                animalList.AddRange(dogList);
 
                 Wolfman wolfman = new Wolfman("wolfman1", 89,44,55);
 
                 animalList.Add(wolfman);
 
-                foreach (Animal animal in animalList)
-                {
-                    Console.WriteLine(animal.Stats());
-                    animal.DoSound();
-
-                    //check if animal is also derived from interface IPerson
-                    if (animal.GetType().GetInterface("IPerson") != null)
-                    {
-                        Console.WriteLine($"Animal {animal.Stats()} is also a Person.");
-                        ((IPerson)animal).Talk();
-
-
-                    }
-
-                }
+                AllAnimalStats(animalList);                         //print all stats for all animals.
 
             }
             catch (Exception e)
