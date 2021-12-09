@@ -8,6 +8,8 @@ namespace ThirdAssignment
 {
     class Utils
     {
+        public enum BirdColor {Blue,Gree,Black };
+
         public static int errNumberValue = -1;
         public static string errStringValue = "INVALID STRING";
         public static bool IsEmptyString(string str)
