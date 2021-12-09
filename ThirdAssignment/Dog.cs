@@ -36,5 +36,10 @@ namespace ThirdAssignment
         {
             return $"Dog Name: {Name} => Age: {Age}, Kind: {Kind}, Weight: {Weight}";
         }
+
+        public string Optional(string optional = "Default option")
+        {
+            return optional;
+        }
     }
 }

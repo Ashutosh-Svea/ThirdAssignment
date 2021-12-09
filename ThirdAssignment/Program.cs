@@ -6,6 +6,18 @@ namespace ThirdAssignment
     class Program
     {
 
+        static void FindTheDogsAndPrintOptionalFunction(List<Animal> animalList)
+        {
+            foreach (Animal animal in animalList)
+            {
+                if (animal.GetType() == typeof(Dog))
+                {
+                    Console.WriteLine("calling optional method for dog now");
+                    Console.WriteLine(((Dog)animal).Optional());
+                }
+            }
+        }
+
         static void AllAnimalStats(List<Animal> animalList)
         {
             foreach (Animal animal in animalList)
@@ -18,8 +30,6 @@ namespace ThirdAssignment
                 {
                     Console.WriteLine($"Animal {animal.Stats()} is also a Person.");
                     ((IPerson)animal).Talk();
-
-
                 }
 
             }
@@ -185,6 +195,7 @@ namespace ThirdAssignment
 
                 AllAnimalStats(animalList);                         //print all stats for all animals.
 
+                FindTheDogsAndPrintOptionalFunction(animalList);    //loop thorugh animal list, find the dogs and print the optional function
             }
             catch (Exception e)
             {
