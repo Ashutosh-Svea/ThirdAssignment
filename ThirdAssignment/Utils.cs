@@ -25,5 +25,28 @@ namespace ThirdAssignment
             else     
                 return true;
         }
+        public static bool IsValidAge(int age)
+        {
+            if (age < 0)
+                return false;
+            else
+                return true;
+        }
+
+        public static bool IsValidWeight(double weight)
+        {
+            if (weight < 0)
+                return false;
+            else
+                return true;
+        }
+        public static bool IsValidHeight(double height)
+        {
+            if (height < 0)
+                return false;
+            else
+                return true;
+        }
+
     }
 }

@@ -23,7 +23,7 @@ namespace ThirdAssignment
             get { return age; }
             set 
             {
-                if (value < 0)
+                if (!Utils.IsValidAge(value))
                     throw new ArgumentException("Age must be greater than 0");
 
                 age = value; 
@@ -71,7 +71,14 @@ namespace ThirdAssignment
         public double Height
         {
             get { return height; }
-            set { height = value; }
+            set 
+            { 
+                if (Utils.IsValidHeight(value))
+                    height = value; 
+                else
+                    throw new ArgumentException("Invalid height entered.");
+
+            }
         }
 
         private double weight;
@@ -79,7 +86,13 @@ namespace ThirdAssignment
         public double Weight
         {
             get { return weight; }
-            set { weight = value; }
+            set 
+            {
+                if (Utils.IsValidHeight(value))
+                    weight = value;
+                else
+                    throw new ArgumentException("Invalid weight entered.");
+            }
         }
         public override string ToString()
         {
