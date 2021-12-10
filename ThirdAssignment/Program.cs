@@ -14,6 +14,7 @@ namespace ThirdAssignment
                 //if (animal.GetType() == typeof(Dog))
                 {
                     Console.WriteLine("calling optional method for dog now");
+                    //maybe change it to temp object and use as operator instead of explicit cast which can through exception...?
                     Console.WriteLine(((Dog)animal).Optional());
                 }
             }
@@ -176,10 +177,9 @@ namespace ThirdAssignment
             birdList.Add(swan);
             return birdList;
         }
-        static void Main(string[] args)
-        {
-            TryDifferentPersons(); //add various persons with PersonHandler and test various cases. Part 1 of assignment...
 
+        static void TryAnimals()
+        {
             try
             {
 
@@ -191,7 +191,7 @@ namespace ThirdAssignment
 
                 animalList.AddRange(dogList);
 
-                Wolfman wolfman = new Wolfman("wolfman1", 89,44,55);
+                Wolfman wolfman = new Wolfman("wolfman1", 89, 44, 55);
 
                 animalList.Add(wolfman);
 
@@ -204,6 +204,31 @@ namespace ThirdAssignment
                 Console.WriteLine(e.Message);
             }
 
+        }
+
+        static void TryErrors()
+        {
+            List<UserError> errorList = new List<UserError>();
+            errorList.Add(new NumericInputError());
+            errorList.Add(new TextInputError());
+
+//three more error classes. have just been printing the error message in loop. perhaps later use in animal classes and person class.
+            errorList.Add(new ObjectInputError());
+            errorList.Add(new OperatorInputError());
+            errorList.Add(new UnknownInputError());
+
+            foreach (UserError er in errorList)
+            {
+                Console.WriteLine(er.UEMessage());
+            }
+        }
+        static void Main(string[] args)
+        {
+            TryDifferentPersons(); //add various persons with PersonHandler and test various cases. Part 1 of assignment...
+
+            TryAnimals();
+
+            TryErrors();
 
             //Let the GC clean it all...not deleting anything manually.
         }
