@@ -10,7 +10,8 @@ namespace ThirdAssignment
         {
             foreach (Animal animal in animalList)
             {
-                if (animal.GetType() == typeof(Dog))
+                if (animal is Dog)
+                //if (animal.GetType() == typeof(Dog))
                 {
                     Console.WriteLine("calling optional method for dog now");
                     Console.WriteLine(((Dog)animal).Optional());
@@ -26,7 +27,8 @@ namespace ThirdAssignment
                 animal.DoSound();
 
                 //check if animal is also derived from interface IPerson
-                if (animal.GetType().GetInterface("IPerson") != null)
+                //if (animal.GetType().GetInterface("IPerson") != null)
+                if (animal is IPerson)
                 {
                     Console.WriteLine($"Animal {animal.Stats()} is also a Person.");
                     ((IPerson)animal).Talk();
