@@ -1,0 +1,18 @@
+﻿F: Om vi under utvecklingen kommer fram till att samtliga fåglar behöver ett nytt attribut, i
+vilken klass bör vi lägga det?
+A: I Bird classen.
+
+F: Om alla djur behöver det nya attributet, vart skulle man lägga det då?
+A: I Animal classen.
+
+F: Försök att lägga till en häst i listan av hundar. Varför fungerar inte det?
+Horse is not of type Dog. List only takes object of type Dog.
+
+ F: Vilken typ måste listan vara för att alla klasser skall kunna lagras tillsammans?
+A: List should be for all objects of type Animal 
+
+F: Förklara vad det är som händer.
+A: Run time Polymorphism. All objects have their own definitions for the function. 
+
+F: Varför inte?
+A: List with Animal type objects do not have access to methods in specialisation or derived classes. 
